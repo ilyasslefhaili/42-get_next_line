@@ -86,9 +86,10 @@ char	*done(char *chkra, char *buf, int fd)
 	{
 		i = 0;
 		rd = read(fd, buf, BUFFER_SIZE);
-		buf[rd] = '\0';
+		
 		if (rd <= 0)
 			break ;
+		buf[rd] = '\0';
 		chkra = ft_strjoin(chkra, buf);
 		while (buf[i] != '\n' && buf[i])
 			i++;
@@ -98,15 +99,18 @@ char	*done(char *chkra, char *buf, int fd)
 
 char	*get_next_line(int fd)
 {
-	char		buf[BUFFER_SIZE + 1];
+	//char		buf[BUFFER_SIZE];
+	char *buf;
 	static char	*chkra;
 	char		*s;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 10|| BUFFER_SIZE <= 0)
 		return (NULL);
 	if (chkra == NULL)
 		chkra = ft_strdup("");
+	buf = ft_calloc(1,BUFFER_SIZE + 1);
 	chkra = done(chkra, buf, fd);
+	free(buf);
 	if (chkra[0] == '\0')
 	{
 		free(chkra);
@@ -116,4 +120,5 @@ char	*get_next_line(int fd)
 	s = ft_strchar(chkra, '\n');
 	chkra = ft_strchr(chkra, '\n');
 	return (s);
+
 }

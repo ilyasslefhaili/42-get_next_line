@@ -31,6 +31,33 @@ char	*ft_strchr(char *str, int c)
 	return (NULL);
 }
 
+void	ft_bzero(void *str, size_t r)
+{
+	unsigned char	*pointer;
+	size_t			i;
+
+	i = 0;
+	pointer = (unsigned char *)str;
+	while (i < r)
+	{
+		pointer[i] = 0;
+		i++;
+	}
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	int		i;
+	void	*dest;
+
+	i = 0;
+	dest = malloc(count * size);
+	if (dest == NULL)
+		return (NULL);
+	ft_bzero(dest, count * size);
+	return (dest);
+}
+
 char	*ft_strdup(char	*src)
 {
 	char	*pstr;

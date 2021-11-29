@@ -98,15 +98,17 @@ char	*done(char *chkra, char *buf, int fd)
 
 char	*get_next_line(int fd)
 {
-	char		buf[BUFFER_SIZE + 1];
-	static char	*chkra[OPEN_MAX];
+	char		*buf;
+	static char	*chkra[1024];
 	char		*s;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (chkra[fd] == NULL)
 		chkra[fd] = ft_strdup("");
+	buf = ft_calloc(1, BUFFER_SIZE);
 	chkra[fd] = done(chkra[fd], buf, fd);
+	free(buf);
 	if (chkra[fd][0] == '\0')
 	{
 		free(chkra[fd]);
