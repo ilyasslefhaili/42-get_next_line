@@ -19,11 +19,12 @@ char	*ft_strchar(char *str, char c)
 	i = 0;
 	if (!str)
 		return (NULL);
-	while (str[i] != c && str[i])
-	{
+	while (str[i] != c && str[i] != '\0')
 		i++;
-	}
-	s = malloc(sizeof(char) * (i + 1));
+	if (str[i] == '\0')
+		s = ft_calloc(1, i + 1);
+	else
+		s = ft_calloc(1, i + 2);
 	if (!s)
 		return (NULL);
 	i = 0;
@@ -33,7 +34,6 @@ char	*ft_strchar(char *str, char c)
 		i++;
 	}
 	s[i] = str[i];
-	s[i + 1] = '\0';
 	return (s);
 }
 
@@ -86,7 +86,6 @@ char	*done(char *chkra, char *buf, int fd)
 	{
 		i = 0;
 		rd = read(fd, buf, BUFFER_SIZE);
-		
 		if (rd <= 0)
 			break ;
 		buf[rd] = '\0';
@@ -99,16 +98,15 @@ char	*done(char *chkra, char *buf, int fd)
 
 char	*get_next_line(int fd)
 {
-	//char		buf[BUFFER_SIZE];
-	char *buf;
+	char		*buf;
 	static char	*chkra;
 	char		*s;
 
-	if (fd < 0 || fd > 10|| BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (chkra == NULL)
 		chkra = ft_strdup("");
-	buf = ft_calloc(1,BUFFER_SIZE + 1);
+	buf = ft_calloc(1, BUFFER_SIZE + 1);
 	chkra = done(chkra, buf, fd);
 	free(buf);
 	if (chkra[0] == '\0')
@@ -120,5 +118,4 @@ char	*get_next_line(int fd)
 	s = ft_strchar(chkra, '\n');
 	chkra = ft_strchr(chkra, '\n');
 	return (s);
-
 }

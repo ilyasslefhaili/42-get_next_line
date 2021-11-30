@@ -13,7 +13,6 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
-# include <fcntl.h>
 # include <unistd.h>
 
 void	*ft_calloc(size_t count, size_t size);

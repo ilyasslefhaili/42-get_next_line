@@ -13,13 +13,12 @@
 # define GET_NEXT_LINE_H
 
 # include <stdlib.h>
-# include <fcntl.h>
 # include <unistd.h>
 
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strchr(char *str, int c);
 char	*get_next_line(int fd);
-char	*ft_strdup( char *src);
+char	*ft_strdup(char *src);
 int		ft_strlen(const char *str);
 
 #endif

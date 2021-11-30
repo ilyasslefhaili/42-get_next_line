@@ -30,6 +30,7 @@ char	*ft_strchr(char *str, int c)
 	free(str);
 	return (NULL);
 }
+
 void	ft_bzero(void *str, size_t r)
 {
 	unsigned char	*pointer;
